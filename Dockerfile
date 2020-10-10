@@ -1,9 +1,9 @@
 # 베이스 이미지 + 이미지 별칭
 FROM adoptopenjdk:8-jdk-hotspot AS builder
 
-ENV http_proxy=http://172.17.0.1:3128 \
-    https_proxy=http://172.17.0.1:3128 \
-    ftp_proxy=http://172.17.0.1:312
+ENV http_proxy 'http://172.17.0.1:3128'
+ENV https_proxy 'http://172.17.0.1:3128'
+ENV ftp_proxy 'http://172.17.0.1:3128'
 
 # gradlew 복사
 COPY gradlew .
@@ -23,9 +23,9 @@ RUN ./gradlew bootJar
 # 베이스 이미지
 FROM adoptopenjdk:8-jdk-hotspot
 
-ENV http_proxy=http://172.17.0.1:3128 \
-    https_proxy=http://172.17.0.1:3128 \
-    ftp_proxy=http://172.17.0.1:312
+ENV http_proxy 'http://172.17.0.1:3128'
+ENV https_proxy 'http://172.17.0.1:3128'
+ENV ftp_proxy 'http://172.17.0.1:3128'
 
 # builder 이미지에서 build/libs/*.jar 파일을 app.jar로 복사
 COPY --from=builder build/libs/*.jar app.jar
